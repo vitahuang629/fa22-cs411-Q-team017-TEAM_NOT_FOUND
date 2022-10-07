@@ -33,6 +33,8 @@ Our data has three parts: product data, customer data and merchant data.
 Product data is the information of merchandise. We’ll scrap the data from websites like Walmart first. Then we may visit those Farmer’s Markets to achieve some real data. As for customer data and merchant data, we mock the data and use MySQL database to store them.
 
 Our data format sample:
+
+```json
 {
 	“Product_Name”: 
 	“Product_Price”:
@@ -52,6 +54,7 @@ Our data format sample:
 	“Farmer_Products”:
 	“Sell_History”:
 }
+```
 
 ## Functionality Description
 
@@ -73,20 +76,12 @@ https://docs.google.com/presentation/d/1F0P-iprvAMh0ThFZqrAJjvIiN9OfW6QCep4u18Oy
 
 ## **Project work distribution**
 
-Backend/SQL:
-
 Backend Java: Mengting Ai, Xiaowen Shang
-
 Order Management: Mengting Ai
-
 Customer/Farmer Management: Xiaowen Shang
-
 Cart Management: Vita Huang
-
 Product Management: Chia-Yi Lee
 
 Scraping data: Vita Huang
-
 Frontend: Chia-Yi Lee
-
 ER/UML: Mengting Ai, Xiaowen Shang, Vita Huang, Chia-Yi Lee
