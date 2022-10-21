@@ -116,7 +116,7 @@ CREATE TABLE `Place_Order` (
 
 ## Insert
 
-![image-20221020221514045](C:\Users\mengt\AppData\Roaming\Typora\typora-user-images\image-20221020221514045.png)
+![./img/image-20221020221514045](C:\Users\mengt\AppData\Roaming\Typora\typora-user-images\image-20221020221514045.png)
 
 The data from Product is real data that crawled from Walmart, and the data from Farmer, Customer and User are generated randomly.
 
