@@ -18,7 +18,7 @@ CREATE TABLE `Customer` (
   UNIQUE KEY `customer_email_UNIQUE` (`customer_email`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -34,7 +34,7 @@ CREATE TABLE `Product` (
   KEY `id` (`product_id`),
   KEY `product_price` (`product_price`),
   CONSTRAINT `farmerid` FOREIGN KEY (`farmer_id`) REFERENCES `Farmer` (`farmer_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -43,7 +43,7 @@ CREATE TABLE `User` (
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
-)
+);
 ```
 
 ```mysql
@@ -59,7 +59,7 @@ CREATE TABLE `Product` (
   KEY `id` (`product_id`),
   KEY `product_price` (`product_price`),
   CONSTRAINT `farmerid` FOREIGN KEY (`farmer_id`) REFERENCES `Farmer` (`farmer_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -70,7 +70,7 @@ CREATE TABLE `Has_ShoppingCart` (
   PRIMARY KEY (`shoppingcart_id`,`cart_customer_id`),
   KEY `Has_ShoppingCart_ibfk_1` (`cart_customer_id`),
   CONSTRAINT `Has_ShoppingCart_ibfk_1` FOREIGN KEY (`cart_customer_id`) REFERENCES `Customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -82,7 +82,7 @@ CREATE TABLE `Contains` (
   KEY `orderid_5_idx` (`order_id`),
   CONSTRAINT `orderid_5` FOREIGN KEY (`order_id`) REFERENCES `Place_Order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `productid_6` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -99,7 +99,7 @@ CREATE TABLE `Includes_Product` (
   CONSTRAINT `cart_2` FOREIGN KEY (`shoppingcart_id`) REFERENCES `Has_ShoppingCart` (`shoppingcart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `customerid_3` FOREIGN KEY (`customer_id`) REFERENCES `Customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `prod_3` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ```mysql
@@ -111,7 +111,7 @@ CREATE TABLE `Place_Order` (
   PRIMARY KEY (`order_id`,`customer_id`),
   KEY `customerid_4_idx` (`customer_id`),
   CONSTRAINT `customerid_4` FOREIGN KEY (`customer_id`) REFERENCES `Customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 ```
 
 ## Insert
@@ -158,6 +158,10 @@ We add another index on famer_name on the table Farmer. This index wasn’t used
 
 ![image-20221021012401925](./img/image-20221021012401925.png)
 
+According to our query experiments, we did not see any difference when we are setting up indexes. First, we set up the index on product_price and we expect the database to use this index when filtering or in the condition we set up. However, the explain analyze did not show any differences and it still use the default index in the table. On the other hand, two indexes set up in attributes
+farmer_name, stock_num did not affect the query performance because these attributes are not relate to our query.
+
+
 ### Query 2
 
 ```mysql
@@ -192,4 +196,8 @@ We set up the index on the product_price column. There are no significant differ
 
 ![image-20221021012629985](./img/image-20221021012629985.png)
 
-In summary, we set up the index for different columns, and the first index we think the index on stock_num from query 2 is useful and may affect our query execution time because the column is relevant to our query. One thing we can make an improvement here for the index is to increase the volume of data, so that the index here can really have some impact on the execution time.
+From the query we set up indexes in different columns, and the index may have chance to improve query performance in attributes in filters and we can see the query did use the index we set up. However, the data size of our table is too small to see the execution time difference. 
+
+### Summary
+In conclusion, for our databases, there are too few records, index may not really affect our query performance.
+Also, from the link in [Full Table Scan](https://dev.mysql.com/doc/refman/8.0/en/table-scan-avoidance.html) in Mysql, one other reason is that **the table is so small that it is faster to perform a table scan than to bother with a key lookup. This is common for tables with fewer than 10 rows and a short row length.** which we think is the main reason that the index is not used in our experiments.
