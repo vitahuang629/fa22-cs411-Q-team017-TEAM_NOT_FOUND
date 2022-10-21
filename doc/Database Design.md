@@ -2,7 +2,7 @@
 
 ## GCP database
 
-![image-20221020221231212](./image-20221020221231212.png)
+![image-20221020221231212](./img/image-20221020221231212.png)
 
 ## DDL
 
@@ -156,7 +156,7 @@ We add another index on famer_name on the table Farmer. This index wasn’t used
 
 #### Result:
 
-![image-20221021012401925](./image-20221021012401925.png)
+![image-20221021012401925](./img/image-20221021012401925.png)
 
 ### Query 2
 
@@ -190,6 +190,6 @@ We set up the index on the product_price column. There are no significant differ
 
 #### Result:
 
-![image-20221021012629985](./image-20221021012629985.png)
+![image-20221021012629985](./img/image-20221021012629985.png)
 
 In summary, we set up the index for different columns, and the first index we think the index on stock_num from query 2 is useful and may affect our query execution time because the column is relevant to our query. One thing we can make an improvement here for the index is to increase the volume of data, so that the index here can really have some impact on the execution time.

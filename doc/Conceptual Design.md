@@ -1,6 +1,6 @@
 **ER diagram:**
 
-![not_found-Page-1.drawio](./not_found-Page-1.drawio.png)
+![not_found-Page-1.drawio](./img/not_found-Page-1.drawio.png)
 
 **Schema:**
 
