@@ -7,10 +7,6 @@
 </head>
 <body>
 <div align="center">
-    <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="logout"/> </form>
-
 
     <h1>Products Records</h1>
     <a href="/new">Add New Product</a>
