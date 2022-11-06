@@ -22,6 +22,22 @@ CREATE TABLE `Customer` (
 ```
 
 ```mysql
+ CREATE TABLE `Farmer` (
+  `farmer_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `farmer_name` varchar(50) NOT NULL,
+  `farmer_email` varchar(100) NOT NULL,
+  `farmer_phone` double NOT NULL,
+  PRIMARY KEY (`farmer_id`),
+  UNIQUE KEY `farmer_id_UNIQUE` (`farmer_id`),
+  UNIQUE KEY `farmer_email_UNIQUE` (`farmer_email`),
+  UNIQUE KEY `farmer_phone_UNIQUE` (`farmer_phone`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `name` (`farmer_name`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
+
+```mysql
 CREATE TABLE `Product` (
   `product_id` int NOT NULL,
   `product_name` varchar(1000) NOT NULL,
