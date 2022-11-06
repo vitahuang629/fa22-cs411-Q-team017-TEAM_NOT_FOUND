@@ -36,7 +36,7 @@ CREATE TABLE `Customer` (
   KEY `name` (`farmer_name`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
-
+```
 
 ```mysql
 CREATE TABLE `Product` (
