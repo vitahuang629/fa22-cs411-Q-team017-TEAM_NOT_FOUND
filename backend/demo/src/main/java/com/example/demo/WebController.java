@@ -17,6 +17,9 @@ public class WebController {
 
     @Autowired
     private ProductDAO dao;
+    @Autowired
+    private FarmerDAO farmerdao;
+
 
     @RequestMapping("/")
     public String viewHomePage(Model model){
@@ -32,6 +35,7 @@ public class WebController {
 
         return "newform";
     }
+
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("product") Product product){
@@ -62,4 +66,14 @@ public class WebController {
         dao.delete(product_id);
         return "redirect:/";
     }
+
+
+    @RequestMapping("/notify")
+    public String listRestock(Model model){
+        List<FarmerProduct> listRestock = farmerdao.farmerlist();
+        model.addAttribute("listRestock", listRestock);
+        return "notify";
+
+    }
+
 }

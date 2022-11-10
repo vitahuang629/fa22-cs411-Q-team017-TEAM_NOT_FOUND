@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Need to Restock</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>Need to Restock</h1>
+    <a href="/">Back</a>
+    <br>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>FarmerID</th>
+            <th>Farmer Name</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="listRestock :${listRestock }">
+            <td th:text="${listRestock.farmer_id}"> Farmer ID</td>
+            <td th:text="${listRestock.farmer_name}">Name</td>
+            <td th:text="${listRestock.p_count}">Count</td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

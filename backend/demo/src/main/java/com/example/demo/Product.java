@@ -4,22 +4,29 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 
+
 public class Product {
 
     private int product_id;
     private String product_name;
     private double product_price;
     private int stock_num;
+    private int farmer_id;
+
     private String product_description;
+
+    private Farmer farmer;
+
 
     public Product(){
     }
 
-    public Product(String product_name, double product_price, int stock_num, String product_description) {
+    public Product(String product_name, double product_price, int stock_num, String product_description, int farmer_id) {
         this.product_name = product_name;
         this.product_price = product_price;
         this.stock_num = stock_num;
         this.product_description = product_description;
+        this.farmer_id = farmer_id;
     }
 
     public int getProduct_id() {
@@ -62,6 +69,22 @@ public class Product {
         this.product_description = product_description;
     }
 
+    public int getFarmer_id() {
+        return farmer_id;
+    }
+
+    public void setFarmer_id(int farmer_id) {
+        this.farmer_id = farmer_id;
+    }
+
+    public Farmer getFarmer() {
+        return farmer;
+    }
+
+    public void setFarmer(Farmer farmer) {
+        this.farmer = farmer;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -69,7 +92,9 @@ public class Product {
                 ", product_name='" + product_name + '\'' +
                 ", product_price=" + product_price +
                 ", stock_num=" + stock_num +
+                ", farmer_id=" + farmer_id +
                 ", product_description='" + product_description + '\'' +
+                ", farmer=" + farmer +
                 '}';
     }
 }
