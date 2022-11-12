@@ -215,5 +215,13 @@ We set up the index on the product_price column. There are no significant differ
 
 From the query we set up indexes in different columns, and the index may have chance to improve query performance in attributes in filters and we can see the query did use the index we set up. However, the data size of our table is too small to see the execution time difference. 
 
+### Query 3
+
+```mysql
+SELECT COUNT(order_id),customer_name FROM Place_Order NATURAL JOIN Customer WHERE customer_id=#{customer_id}
+```
+
+We didn't implement query 1 as an advanced query. Instead, we use query 3 as another advanced query. So the advanced query we implemented are query 2 and query 3.
+
 ### Summary
 In conclusion, there are approximately one thousand rows for each table in our database, the index may not affect our query performance. Also, reference from MySQL, the link of [Full Table Scan](https://dev.mysql.com/doc/refman/8.0/en/table-scan-avoidance.html), another reason is that the table size is not big enough that has faster performance on table scan than using a key lookup. This is common for tables with fewer than 10 rows and a short row length. Thus, we think this is the main reason for the index does not work well in our experiments.

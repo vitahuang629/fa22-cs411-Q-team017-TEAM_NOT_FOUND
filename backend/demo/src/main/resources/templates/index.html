@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Product Manager Application</title>
@@ -11,8 +11,39 @@
     <h1>Products Records</h1>
     <a href="/new">Add New Product</a>
     <a href="/notify">Notify Restock</a>
+    <form>
+        <input type="text" size="12" id="un" /><br />
+        <input type="submit" onclick="saveUn(event);" />
+    </form>
+    <br>
+    <form>
+        <input type="text" size="12" id="u1" /><br />
+        <input type="submit" onclick="saveUn(event);" />
+    </form>
+    <script>
+        function saveUn(event) {
+            var username = document.getElementById('un').value;
+            // alert(username);
+            // var url = "http://localhost:8080/order/getOrder/" + username;
+            var url = "http://localhost:8080/search?name="+username;
+            // window.navigate(url);
+            window.location.replace(url);
+            event.preventDefault();
+        }
+
+        function saveUn(event) {
+            var id = document.getElementById('u1').value;
+            // alert(username);
+            // var url = "http://localhost:8080/order/getOrder/" + username;
+            var url = "http://localhost:8080/getOrder?id="+id;
+            // window.navigate(url);
+            window.location.replace(url);
+            event.preventDefault();
+        }
+    </script>
     <br>
     <br>
+
     <table border="1" cellpadding="10">
         <thead>
         <tr>

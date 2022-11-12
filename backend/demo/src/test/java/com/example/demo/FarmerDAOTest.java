@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.mapper.FarmerDAO;
+import com.example.demo.pojo.Farmer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;

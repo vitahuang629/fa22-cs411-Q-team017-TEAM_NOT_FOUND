@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.mapper.ProductDAO;
+import com.example.demo.pojo.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,18 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductDAOTest {
     private ProductDAO dao;
-    private FarmerDAO farmerdao;
 
     @BeforeEach
     void setUp() throws Exception{
         DriverManagerDataSource datasource= new DriverManagerDataSource();
-        datasource.setUrl("jdbc:mysql://34.135.173.85:3306/team017");
+        datasource.setUrl("jdbc:mysql://34.135.173.85:3306/teamtest");
         datasource.setUsername("root");
         datasource.setPassword("1234");
         datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
         dao = new ProductDAO(new JdbcTemplate(datasource));
-        farmerdao = new FarmerDAO(new JdbcTemplate(datasource));
     }
     @Test
     void testList(){
@@ -31,11 +31,11 @@ public class ProductDAOTest {
 
     }
 
-    @Test
-    void testSave(){
-        Product product = new Product("banana",0.99,1000,"I love banana.",100765);
-        dao.save(product);
-    }
+//    @Test
+//    void testSave(){
+//        Product product = new Product("banana",0.99,1000,"I love banana.");
+//        dao.save(product);
+//    }
 
     @Test
     void testGet(){
@@ -61,5 +61,4 @@ public class ProductDAOTest {
         int product_id = 12;
         dao.delete(product_id);
     }
-
 }

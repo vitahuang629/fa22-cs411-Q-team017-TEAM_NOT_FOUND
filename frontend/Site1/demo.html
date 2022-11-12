@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <table id="example1" class="table table-bordered table-striped dataTable " role="grid" aria-describedby="example1_info">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>                           
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody> 
+      
+          <tr>
+            <td>111</td>
+            <td>John</td>
+            <td>
+              <input type="number" class="pr price" name="" pr_id="" value="" onchange="add_to_total(this)" style="width: 60px; height: 26px"> 
+            </td>    
+            <td>
+              <input type="number" class="pr qty" name="" value="" onchange="add_to_total(this)" style="width: 60px; height: 26px">
+            </td>
+            <td>
+              <input type="number" name="" class="pr total_price" style="width: 60px; height: 26px">
+            </td>
+          </tr>
+          <tr>
+            <td>222</td>
+            <td>Jane</td>
+            <td>
+              <input type="number" class="pr price" name="" pr_id="" value="" onchange="add_to_total(this)" style="width: 60px; height: 26px"> 
+            </td>    
+            <td>
+              <input type="number" class="pr qty" name="" value="" onchange="add_to_total(this)" style="width: 60px; height: 26px">
+            </td>
+            <td>
+              <input type="number" name="" class="pr total_price" style="width: 60px; height: 26px">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><strong id="p_total"></strong></td>
+            <td>
+            <strong id="q_total"></strong>
+          </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>                             
+            <th>Quantity</th> 
+            <th>Total</th>             
+          </tr>
+        </tfoot>
+      </table>
+      <script type="text/javascript">
+        function add_to_total(el){
+        var parent = $(el).closest('tr');
+        var price = parent.find('.price').val() == "" ? 1 : parent.find('.price').val();
+        var qty = parent.find('.qty').val() == "" ? 1 : parent.find('.qty').val();
+        var total = price * qty;
+        parent.find('.total_price').val(total);
+        }
+    </script>
+  </body>
+</html>
+
