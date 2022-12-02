@@ -35,7 +35,7 @@ public class WebController {
     private OrderDAO orderDAO;
 
     @Autowired
-    private FarmerProDAO farmerProDAO;
+    private FarmerRankDAO farmerRankDAO;
 
     @Autowired
     private IncludeProductsDao includeProductsDao;
@@ -103,9 +103,6 @@ public class WebController {
         CustomerOrder orderSum = orderService.getOrderNum(customer_id);
         List<PlaceOrder> orders = orderService.getOrder(customer_id);
         String status = placeOrderDAO.getStatus(customer_id);
-//        for (PlaceOrder order:orders){
-//            System.out.println(order.toString());
-//        }
 
         String name=orderSum.getCustomer_name();
         Integer cnt=orderSum.getCnt();
@@ -126,8 +123,6 @@ public class WebController {
         }
         model.addAttribute("listShop",includeProducts);
         model.addAttribute("sum",totalPrice);
-//        resultMessage.success("001", includeProducts);
-//        return resultMessage;
         return "Shopping-cart";
 
     }
@@ -139,18 +134,18 @@ public class WebController {
         return "product";
     }
 
-    @RequestMapping("/rank")
-    public String prodfarmList(Model model){
-        List<FarmerPro> listFarmerPro = farmerProDAO.list();
-        model.addAttribute("listFarmpro", listFarmerPro);
-        return "rank";
-    }
-
     @RequestMapping("/orderhistory")
     public String listOrder(Model model){
         List<Order> listOrder = orderDAO.listOrder();
         model.addAttribute("listOrder", listOrder);
         return "order";
+    }
+
+    @RequestMapping("/rank")
+    public String prodfarmList(Model model){
+        List<FarmerRank> listFarmerRank = farmerRankDAO.list();
+        model.addAttribute("listFarmerrank", listFarmerRank);
+        return "rank";
     }
 
 }

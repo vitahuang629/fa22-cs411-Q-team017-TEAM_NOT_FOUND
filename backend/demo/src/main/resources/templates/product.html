@@ -13,6 +13,30 @@
       margin: 0;
   }
   </style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    function saveUn(event) {
+      var id = $(event).parent().parent().find("td")[0].innerHTML;//find("innerHTML");
+      var price = $(event).parent().parent().find("td")[2].innerHTML;//.html();
+
+      // console.log(price);
+      var pathname = window.location.href;
+      var customer_id = pathname.split('_')[1];
+      var url = "http://localhost:8080/addCart/" + id +"/" +price +"/" + customer_id;
+      console.log(url);
+      window.open(url,"_blank");
+      // window.location.href = url;
+      // var httpRequest = new XMLHttpRequest();
+      // httpRequest.open('GET', url, true);
+      // httpRequest.send();
+      // httpRequest.onreadystatechange = function () {
+      //   if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+      //     var json = httpRequest.responseText;
+      //     console.log(json);
+      //   }
+      // };
+    }
+  </script>
 </head>
 <body>
 <div align="center">
@@ -37,35 +61,10 @@
       <td id='price' th:text="${product.product_price}">Price</td>
       <td th:text="${product.product_description}">Description</td>
       <td>
-      <input type="submit" onclick="saveUn(event);"/>
+        <button onclick="saveUn(this)">Add</button>
       </td>
-
-      <script>
-        function saveUn(event) {
-            var pathname = window.location.href;
-            var test = pathname.split('_');
-            var tab = document.getElementById("Table");
-            var tr = tab.getElementsByTagName("tr");
-            for (var i = 0; i < tr.length; i++) {
-                tr[i].onclick=function(){
-                var thisTR = this.innerHTML;//所点击的一行内容
-                var id_tmp = thisTR.split('<td id="id">')[1];
-                var id_ans = id_tmp.split('</td>')[0];
-                var price_tmp = thisTR.split('<td id="price">')[1];
-                var price_ans = price_tmp.split('</td>')[0];
-                var url = "http://localhost:8080/addCart/" + id_ans +"/" +price_ans +"/" + test[1];
-                // console.log(url);
-                var httpRequest = new XMLHttpRequest();
-                httpRequest.open('GET', url, true);
-                }
-            }
-
-
-        }
-      </script>
-
-
     </tr>
+
     </tbody>
 
   </table>
@@ -73,4 +72,5 @@
 </div>
 
 </body>
+
 </html>

@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Farmer Rank</title>
+    <style>
+    h1 {
+    background-color: #F4D03F;
+      height: 150px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+  }
+  </style>
 </head>
 <body>
+<div align="center">
+
+    <h1>Farmer Ranks</h1>
+
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>FarmerId</th>
+            <th>Rank</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Total Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rank :${listFarmerrank }">
+            <td th:text="${rank.farmer_id}">Farmer ID</td>
+            <td th:text="${rank.rank_1}">Rank</td>
+            <td th:text="${rank.product_name}">Product Name</td>
+            <td th:text="${rank.product_price}">Product Price</td>
+            <td th:text="${rank.sum1}">Quantity</td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
+
 
 </body>
 </html>

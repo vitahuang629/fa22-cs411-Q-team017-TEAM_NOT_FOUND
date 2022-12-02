@@ -108,14 +108,20 @@ public class dbController {
     @GetMapping("/addCart/{product_id}/{price}/{customer_id}")
     public String addCart(@PathVariable Integer product_id, @PathVariable Double price,@PathVariable Integer customer_id)  {
         IncludeProducts includeProducts = new IncludeProducts(customer_id,product_id, 1,price);
-//        return includeProducts.toString();
-        includeProductsDao.insertProduct(includeProducts);
-////
+        IncludeProducts one = includeProductsDao.selectOne(product_id);
+//        System.out.println(includeProducts.toString());
+        if (one != null) {
+            System.out.println(one.toString());
+            includeProductsDao.updateOne(product_id, one.getQuantity() + 1);
+        } else {
+            includeProductsDao.insertProduct(includeProducts);
+        }
         return "OK";
     }
 
 
-    @DeleteMapping("/deleteCart/{product_id}")
+
+    @GetMapping("/deleteCart/{product_id}")
     public String deleteCart(@PathVariable Integer product_id){
         includeProductsDao.deleteOne(product_id);
         return "OK";

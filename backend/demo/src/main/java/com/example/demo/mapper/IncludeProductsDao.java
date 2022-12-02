@@ -23,5 +23,8 @@ public interface IncludeProductsDao {
 
     @Update("update Includes_Product set quantity=#{quantity} where product_id=#{product_id}")
     void updateOne(Integer product_id, Integer quantity);
+
+    @Select("select * from Includes_Product where product_id=#{product_id}")
+    IncludeProducts selectOne(Integer product_id);
 }
 
