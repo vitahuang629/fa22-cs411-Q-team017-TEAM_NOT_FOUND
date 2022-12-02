@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Application</title>
+  <style>
+    h1 {
+    background-color: #F4D03F;
+      height: 150px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+  }
+  </style>
+</head>
+<body>
+<div align="center">
+  <h1>Products</h1>
+  <br>
+  <br>
+
+  <table border="1" cellpadding="10" id="Table">
+    <thead>
+    <tr>
+      <th>ProductId</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Product description</th>
+      <th>Add to shopping cart</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product :${listProduct }">
+      <td id='id' th:text="${product.product_id}">ID</td>
+      <td th:text="${product.product_name}">Name</td>
+      <td id='price' th:text="${product.product_price}">Price</td>
+      <td th:text="${product.product_description}">Description</td>
+      <td>
+      <input type="submit" onclick="saveUn(event);"/>
+      </td>
+
+      <script>
+        function saveUn(event) {
+            var pathname = window.location.href;
+            var test = pathname.split('_');
+            var tab = document.getElementById("Table");
+            var tr = tab.getElementsByTagName("tr");
+            for (var i = 0; i < tr.length; i++) {
+                tr[i].onclick=function(){
+                var thisTR = this.innerHTML;//所点击的一行内容
+                var id_tmp = thisTR.split('<td id="id">')[1];
+                var id_ans = id_tmp.split('</td>')[0];
+                var price_tmp = thisTR.split('<td id="price">')[1];
+                var price_ans = price_tmp.split('</td>')[0];
+                var url = "http://localhost:8080/addCart/" + id_ans +"/" +price_ans +"/" + test[1];
+                // console.log(url);
+                var httpRequest = new XMLHttpRequest();
+                httpRequest.open('GET', url, true);
+                }
+            }
+
+
+        }
+      </script>
+
+
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+</body>
+</html>

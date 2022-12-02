@@ -5,7 +5,7 @@ import java.util.Date;
 public class PlaceOrder {
     private int order_id;
     private int customer_id;
-    private Date date;
+    private java.sql.Date order_date;
     private float price;
 
     public float getPrice() {
@@ -16,12 +16,22 @@ public class PlaceOrder {
         this.price = price;
     }
 
-    public Date getDate() {
-        return date;
+    public java.sql.Date getDate() {
+        return order_date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(java.sql.Date date) {
+        this.order_date = order_date;
+    }
+
+    @Override
+    public String toString() {
+        return "PlaceOrder{" +
+                "order_id=" + order_id +
+                ", customer_id=" + customer_id +
+                ", order_date=" + order_date +
+                ", price=" + price +
+                '}';
     }
 
     public int getOrder_id() {
@@ -44,13 +54,15 @@ public class PlaceOrder {
         this.order_id = order_id;
         this.customer_id = customer_id;
     }
-    public PlaceOrder(int order_id, int customer_id, Date date, float price) {
+    public PlaceOrder(int order_id, int customer_id, java.sql.Date order_date, float price) {
         this.order_id = order_id;
         this.customer_id = customer_id;
-        this.date = date;
+        this.order_date = order_date;
         this.price = price;
     }
-
+    public PlaceOrder(int order_id) {
+        this.order_id = order_id;
+    }
     public PlaceOrder(){
     }
 }

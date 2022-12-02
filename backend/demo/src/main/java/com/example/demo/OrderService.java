@@ -14,8 +14,13 @@ public class OrderService {
     @Autowired
     private PlaceOrderDAO orderMapper;
 
-    public List<CustomerOrder> getOrder(Integer userId) {
-        List<CustomerOrder> list = orderMapper.getOrderByCustomerId(userId);
+    public CustomerOrder getOrderNum(Integer userId) {
+        CustomerOrder list = orderMapper.getOrderByCustomerIdAgg(userId);
+        return list;
+    }
+
+    public List<PlaceOrder> getOrder(Integer userId) {
+        List<PlaceOrder> list = orderMapper.getOrderByCustomerId(userId);
         return list;
     }
 }

@@ -1,20 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.*;
-import com.example.demo.mapper.PlaceOrderDAO;
-import com.example.demo.mapper.ProductyDAO;
-import com.example.demo.pojo.CustomerOrder;
-import com.example.demo.pojo.PlaceOrder;
-import com.example.demo.pojo.Product;
+import com.example.demo.mapper.*;
+import com.example.demo.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class dbController {
@@ -28,7 +21,13 @@ public class dbController {
     private PlaceOrderDAO placeOrderDAO;
 
     @Autowired
-    private ResultMessage resultMessage;
+    private ProductDAO productDAO;
+
+    @Autowired
+    private ResultMessage resultMessage1;
+
+    @Autowired
+    private ResultMessage resultMessage2;
 
 //    @Autowired
 //    private PlaceOrderDAO orderMapper;
@@ -36,6 +35,17 @@ public class dbController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private ContainsDAO containsDAO;
+
+    @Autowired
+    private ContainsService containsService;
+
+    @Autowired
+    private IncludeProductsDao includeProductsDao;
+
+    @Autowired
+    private ResultMessage resultMessage;
 
     @GetMapping("/search")    //url: /search?id=
     public List<Product> listMaterial(@RequestParam("name") String name){
@@ -71,21 +81,52 @@ public class dbController {
 
     @GetMapping("/search_product")    //url: /search?id=
     public String listMaterial(@RequestParam("id") int id){
-        return placeOrderDAO.getOrderByCustomerId(id).toString();
+        return placeOrderDAO.getOrderByCustomerIdAgg(id).toString();
     }
 
-//    @GetMapping("/getOrder/{customer_id}")
-//    public ResultMessage getOrder(@PathVariable("customer_id")  Integer customer_id) {
-//        List<PlaceOrder> orders = orderService.getOrder(customer_id);
-//        resultMessage.success("001", orders);
-//        return resultMessage;
-//    }
+    @PostMapping("/cartToOrder")
+    public String insertToOrder(@RequestBody ProductQuantity productQuantity) {
+        Integer customer_id = productQuantity.getCustomer_id();
+        float price = productQuantity.getPrice();
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//        return date.toString();
+        List<PlaceOrder> orderIds=placeOrderDAO.getOrderByCustomerId(customer_id);
+        Integer order_id = orderIds.get(orderIds.size() - 1).getOrder_id()+1;
+        PlaceOrder placeOrder = new PlaceOrder(order_id,customer_id,sqlDate,price);
+        placeOrderDAO.insertOrder(placeOrder);
 
-    @GetMapping("/getOrder")    //url: /search?id=
-    public ResultMessage listMaterial(@RequestParam("id") Integer customer_id){
-        List<CustomerOrder> orders = orderService.getOrder(customer_id);
-        resultMessage.success("001", orders);
-        return resultMessage;
+//        for (List product_quantity:productQuantity.getProduct_quantity()){
+//
+//            Contains contains = new Contains(Integer.parseInt(product_quantity.get(0).toString()),order_id,Integer.parseInt(product_quantity.get(1).toString()));
+//            containsDAO.insertContains(contains);
+//
+//        }
+        return "OK";
+//        return price;
     }
+    @GetMapping("/addCart/{product_id}/{price}/{customer_id}")
+    public String addCart(@PathVariable Integer product_id, @PathVariable Double price,@PathVariable Integer customer_id)  {
+        IncludeProducts includeProducts = new IncludeProducts(customer_id,product_id, 1,price);
+//        return includeProducts.toString();
+        includeProductsDao.insertProduct(includeProducts);
+////
+        return "OK";
+    }
+
+
+    @DeleteMapping("/deleteCart/{product_id}")
+    public String deleteCart(@PathVariable Integer product_id){
+        includeProductsDao.deleteOne(product_id);
+        return "OK";
+    }
+
+    @GetMapping("/updateCart/{product_id}/{quantity}")
+    public String updateCart(@PathVariable Integer product_id, @PathVariable Integer quantity) {
+        includeProductsDao.updateOne(product_id, quantity);
+        return "OK";
+    }
+
+
 
 }
