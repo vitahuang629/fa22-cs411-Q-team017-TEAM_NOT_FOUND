@@ -21,7 +21,7 @@
 | ---------- | -------------- |
 | Title      | Farmer’s Market order system |
 | System URL | link_to_system |
-| Video Link | link_to_video  |
+| Video Link | https://drive.google.com/file/d/1-l1wASAfWUxrj2eD2jfR3BDDFZtijVLB/view?usp=share_link |
 
 ## Project Summary
 

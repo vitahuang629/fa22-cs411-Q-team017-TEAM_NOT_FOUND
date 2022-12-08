@@ -21,6 +21,9 @@ public interface IncludeProductsDao {
     @Delete("DELETE FROM Includes_Product WHERE product_id=#{product_id}")
     void deleteOne(Integer product_id);
 
+    @Delete("DELETE FROM Includes_Product WHERE customer_id=#{customer_id}")
+    void clear(Integer customer_id);
+
     @Update("update Includes_Product set quantity=#{quantity} where product_id=#{product_id}")
     void updateOne(Integer product_id, Integer quantity);
 

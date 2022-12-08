@@ -95,6 +95,7 @@ public class dbController {
         Integer order_id = orderIds.get(orderIds.size() - 1).getOrder_id()+1;
         PlaceOrder placeOrder = new PlaceOrder(order_id,customer_id,sqlDate,price);
         placeOrderDAO.insertOrder(placeOrder);
+        includeProductsDao.clear(customer_id);
 
 //        for (List product_quantity:productQuantity.getProduct_quantity()){
 //
